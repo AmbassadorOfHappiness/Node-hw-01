@@ -1,43 +1,18 @@
 import {Router} from 'express';
-import model from '../../model/contacts/index';
-import { validateCreate, validateUpdate, validateId } from './validation'
+import {
+  listContacts,
+  getContactById,
+  addContact,
+  updateContact,
+  removeContact,
+} from '../../controllers/contacts/index';
+import { validateCreate, validateUpdate, validateId } from '../../midllewares/validation/contactValidation'
 const router = new Router();
 
-router.get('/', async (req, res, next) => {
-  const contacts = await model.listContacts();
-  res.status(200).json(contacts)
-})
-
-router.get('/:id', validateId, async (req, res, next) => {
-  const { id } = req.params;
-  const contact = await model.getContactById(id);
-  if (contact) {
-    return res.status(200).json({ message: 'template message' });
-  }
-  res.status(404).json({ message: 'Not found' });
-})
-
-router.post('/', validateCreate, async (req, res, next) => {
-  const newContact = await model.addContact(req.body);
-  res.status(201).json(newContact);
-})
-
-router.delete('/:id', validateId, async (req, res, next) => {
-  const { id } = req.params;
-  const contact = await model.removeContact(id);
-  if (contact) {
-    return res.status(200).json({ message: 'contact deleted' });
-  }
-  res.status(404).json({ message: 'Not found' });
-})
-
-router.put('/:id', validateId, validateUpdate, async (req, res, next) => {
-  const { id } = req.params;
-  const contact = await model.updateContact(id, req.body);
-  if (contact) {
-    return res.status(200).json(contact);
-  }
-  res.status(404).json({ message: 'Not found' });
-})
+router.get('/', listContacts);
+router.get('/:id', validateId, getContactById);
+router.post('/', validateCreate, addContact);
+router.delete('/:id', validateId, removeContact);
+router.put('/:id', validateId, validateUpdate, updateContact)
 
 export default router;

@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import contacts from '../../db/contacts.json';
-import contactsPath  from '../contactsPath';
+import contactsPath  from './contactsPath';
 
 const updateContact = async (contactId, body) => {
   const index = contacts.findIndex((contact) => contact.id === contactId);
