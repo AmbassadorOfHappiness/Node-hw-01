@@ -1,10 +1,8 @@
-const fs = require('fs/promises');
-const contactsPath = require('../contactsPath');
+import contactsOperations from '../../model/contacts';
 
-const listContacts = async () => {
-  const contact = await fs.readFile(contactsPath, 'utf8');
-  const result = JSON.parse(contact);
-  return result;
-};
+const listContacts = async (req, res) => {
+  const contacts = await contactsOperations.listContacts()
+  res.status(200).json(contacts);
+}
 
-module.exports = listContacts;
+export default listContacts;

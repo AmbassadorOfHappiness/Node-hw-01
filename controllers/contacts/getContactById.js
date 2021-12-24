@@ -1,9 +1,12 @@
-const listContacts = require('./listContacts');
+import contactsOperations from '../../model/contacts';
 
-const getContactById = async (contactId) => {
-  const contacts = await listContacts();
-  const [contact] = contacts.filter((contact) => String(contact.id) === String(contactId));
-  return contact;
-};
+const getContactById = async (req, res) => {
+  const { id } = req.params;
+  const contact = await contactsOperations.removeContact(id);
+  if (contact) {
+    return res.status(200).json({ message: 'Contact deleted' });
+  }
+  res.status(404).json({ message: `Contact '${id}' not found` });
+}
 
-module.exports = getContactById;
+export default getContactById;

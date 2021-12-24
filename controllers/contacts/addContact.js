@@ -1,15 +1,8 @@
-const fs = require('fs/promises');
-// const path = require('path');
-const crypto = require('crypto');
+import contactsOperations from '../../model/contacts';
 
-const listContacts = require('./listContacts');
-const contactsPath = require('../contactsPath');
-
-const addContact = async (name, email, phone) => {
-  const contacts = await listContacts();
-  const newContact = { id: crypto.randomUUID(), name, email, phone };
-  contacts.push(newContact);
-  await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2),);
-  return newContact;
+const addContact = async (req, res) => {
+  const newContact = await contactsOperations.addContact(req.body)
+  res.status(201).json(newContact);
 }
-module.exports = addContact;
+
+export default addContact;
