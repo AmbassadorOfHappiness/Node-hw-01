@@ -1,8 +1,12 @@
-import contactsOperations from '../../model/contacts';
+const repository = require('../../repository/contacts');
+const { HttpCode } = require('../../config/constants');
 
-const listContacts = async (req, res) => {
-  const contacts = await contactsOperations.listContacts()
-  res.status(200).json(contacts);
+const listContacts = async (req, res, next) => {
+  // console.log(req.query)
+  const contacts = await repository.listContacts(req.query)
+  res
+    .status(HttpCode.OK)
+    .json({ status: 'success', code: HttpCode.OK, data: { ...contacts } });
 }
 
-export default listContacts;
+module.exports = listContacts;
