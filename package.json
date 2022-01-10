@@ -2,10 +2,9 @@
   "name": "node-hw-01",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node --es-modules-specifier-resolution=node ./bin/server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon --es-module-specifier-resolution=node ./bin/server.js",
+    "start": "cross-env NODE_ENV=production node -r dotenv/config --es-modules-specifier-resolution=node ./bin/server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon -r dotenv/config --es-module-specifier-resolution=node ./bin/server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
@@ -31,10 +30,17 @@
     "nodemon": "2.0.15"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "cross-env": "7.0.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^6.0.5",
+    "helmet": "^5.0.1",
     "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.4",
     "morgan": "^1.10.0"
   }
 }
