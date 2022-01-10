@@ -1,11 +1,14 @@
 const repository = require('../../repository/contacts');
 const { HttpCode } = require('../../config/constants');
 
-const removeContact = async (req, res, next) => {
+const updateContact = async (req, res, next) => {
   const { id } = req.params;
   const { id: userId } = req.user;
   try {
-    const contact = await repository.removeContact(userId, id);
+    const contact = await repository.updateContact(userId, id, req.body, {
+      new: true,
+      runValidators: true
+    });
     if (!contact) {
       return res.status(HttpCode.BAD_REQUEST).json({
         status: 'error',
@@ -13,11 +16,11 @@ const removeContact = async (req, res, next) => {
         message: `Can't find contact with id: ${id}`,
         data: contact,
       });
-    }
+    }  
     return res.status(HttpCode.OK).json({
       status: 'success',
       code: HttpCode.OK,
-      message: `Contact ${id} deleted`,
+      message: `Contact ${id} updated`,
       data: contact,
     });
   } catch (error) {
@@ -29,4 +32,4 @@ const removeContact = async (req, res, next) => {
   }
 }
 
-module.exports = removeContact;
+module.exports = updateContact;

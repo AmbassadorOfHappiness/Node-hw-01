@@ -1,15 +1,16 @@
-const fs = require('fs/promises');
-// const path = require('path');
-const crypto = require('crypto');
+const repository = require("../../repository/contacts");
+const { HttpCode } = require("../../config/constants");
 
-const listContacts = require('./listContacts');
-const contactsPath = require('../contactsPath');
+const addContact = async (req, res, next) => {
+  const { id: userId } = req.user;
+  const newContact = await repository.addContact(userId, req.body);
+  return res
+    .status(HttpCode.CREATED)
+    .json({
+      status: "success",
+      code: HttpCode.OK,
+      data: { contact: newContact }
+    });
+};
 
-const addContact = async (name, email, phone) => {
-  const contacts = await listContacts();
-  const newContact = { id: crypto.randomUUID(), name, email, phone };
-  contacts.push(newContact);
-  await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2),);
-  return newContact;
-}
 module.exports = addContact;
