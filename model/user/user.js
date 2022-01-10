@@ -10,7 +10,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: [true, 'Email is required'],
+      required: [true, 'Set email for user'],
       unique: true,
       validate(value) {
         const re = /\S+@\S+\.\S+/
@@ -19,7 +19,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required: [true, 'Set password for user'],
     },
     role: {
       type: String,
@@ -27,7 +27,7 @@ const userSchema = new Schema(
         values: Object.values(Role),
         message: 'Role is not allowed'
       },
-      default: Role.STARTER,
+      default: Role.USER,
     },
     token: {
       type: String,

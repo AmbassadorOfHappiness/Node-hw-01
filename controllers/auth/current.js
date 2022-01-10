@@ -1,6 +1,5 @@
 const {HttpCode} = require("../../config/constants");
 
-
 const currentUser = async (req, res, next) => {
   return await res
     .status(HttpCode.OK)

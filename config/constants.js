@@ -12,14 +12,8 @@ const HttpCode = {
 }
 
 const Role = {
-  STARTER: 'starter',
-  PRO: 'pro',
-  BUSINESS: 'business',
+  ADMIN: 'administrator',
+  USER: 'user',
 }
-
-// const Role = {
-//   ADMIN: 'administrator',
-//   USER: 'user',
-// }
 
 module.exports = {HttpCode, Role};

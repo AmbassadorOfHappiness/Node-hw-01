@@ -14,7 +14,7 @@ const updateSchema = Joi.object({
   email: Joi.string().email().optional(),
   phone: Joi.string().optional(),
   favorite: Joi.bool().optional(),
-}).or('name', 'email', 'phone', 'favorite');
+}).or('name', 'email', 'phone');
 
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.bool().required(),
@@ -25,10 +25,10 @@ const regLimit = /\d+/
 const querySchema = Joi.object({
   limit: Joi.string().pattern(regLimit).optional(),
   skip: Joi.number().min(0).optional(),
-  sortBy: Joi.string().valid('name', 'email', 'phone', 'favorite').optional(),
-  sortByDesc: Joi.string().valid('name', 'email', 'phone', 'favorite').optional(),
+  sortBy: Joi.string().valid('name', 'email').optional(),
+  sortByDesc: Joi.string().valid('name', 'email').optional(),
   filter: Joi.string()
-    .pattern(new RegExp('(name|email|phone|favorite)\\|?(name|email|phone|favorite)+'))
+    .pattern(new RegExp('(name|email)\\|?(name|email)+'))
     .optional(),
 })
 
@@ -49,7 +49,7 @@ const validateUpdate = async ( req, res, next ) => {
   } catch (err) {
     const [{ type }] = err.details;
     if (type === 'object.missing') {
-      return res.status(HttpCode.BAD_REQUEST).json({message: 'Missing field favorite'})
+      return res.status(HttpCode.BAD_REQUEST).json({message: 'missing field favorite'})
     }
     return res.status(HttpCode.BAD_REQUEST).json({message: err.message})
   }
@@ -71,7 +71,7 @@ const validateUpdateFavorite = async (req, res, next) => {
   } catch (err) {
     const [{ type }] = err.details
     if (type === 'object.missing') {
-      return res.status(HttpCode.BAD_REQUEST).json({ message: 'Missing field favorite' })
+      return res.status(HttpCode.BAD_REQUEST).json({ message: 'missing field favorite' })
     }
     return res.status(HttpCode.BAD_REQUEST).json({ message: err.message })
   }
