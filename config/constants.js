@@ -8,7 +8,9 @@ const HttpCode = {
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
+  TOO_MANY_REQUESTS: 429,
   INTERNAL_SERVER_ERROR: 500,
+  SE: 503,
 }
 
 const Role = {
@@ -18,7 +20,6 @@ const Role = {
 }
 
 const LIMIT_JSON = 5000;
-
 
 const CLOUD_FOLDER_AVATARS = 'Node_hw';
 
