@@ -6,11 +6,12 @@ const {
   logout,
   signup
 } = require("../../../controllers/auth");
-const guard = require("../../../midllewares/guard");
+const guard = require("../../../middlewares/guard");
+const wrapperError = require('../../../middlewares/error-handler');
 
-router.get('/current', guard, currentUser);
-router.post('/login', login);
-router.post('/logout', guard, logout);
-router.post('/signup', signup);
+router.get('/current', guard, wrapperError(currentUser));
+router.post('/login', wrapperError(login));
+router.post('/logout', guard, wrapperError(logout));
+router.post('/signup', wrapperError(signup));
 
 module.exports = router;

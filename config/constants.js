@@ -8,8 +8,13 @@ const HttpCode = {
   FORBIDDEN: 403,
   NOT_FOUND: 404,
   CONFLICT: 409,
+  TOO_MANY_REQUESTS: 429,
   INTERNAL_SERVER_ERROR: 500,
+  SE: 503,
 }
+
+const MIN_AGE = 16;
+const MAX_AGE = 69;
 
 const Role = {
   STARTER: 'starter',
@@ -19,7 +24,6 @@ const Role = {
 
 const LIMIT_JSON = 5000;
 
-
 const CLOUD_FOLDER_AVATARS = 'Node_hw';
 
-module.exports = {HttpCode, Role, LIMIT_JSON, CLOUD_FOLDER_AVATARS};
+module.exports = {HttpCode, MIN_AGE, MAX_AGE, Role, LIMIT_JSON, CLOUD_FOLDER_AVATARS};

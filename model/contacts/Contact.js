@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, SchemaTypes, model } = require("mongoose");
+const { MIN_AGE, MAX_AGE } = require('../../config/constants');
 
 const contactSchema = new Schema(
   {
@@ -7,13 +8,18 @@ const contactSchema = new Schema(
       required: [true, 'Set name for contact'],
       maxLength: [20, "Max length 20 signs"],
     },
+    age: {
+      type: Number,
+      min: MIN_AGE,
+      max: MAX_AGE,
+      default: null,
+    },
     email: {
       type: String,
       required: [true, "Please add your email address"],
       lowercase: true,
       unique: true,
       maxLength: [50, "Max length 50 signs"],
-      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     phone: {
       type: String,
@@ -21,6 +27,11 @@ const contactSchema = new Schema(
     favorite: {
       type: Boolean,
       default: false,
+    },
+    owner: {
+      type: SchemaTypes.ObjectId,
+      ref: 'user',
+      required: true,
     },
 }, {
   versionKey: false,
@@ -34,6 +45,13 @@ const contactSchema = new Schema(
   },
   toObject: { virtuals: true }
 });
+
+contactSchema.virtual('status').get(function () {
+  if (this.age >= 40) {
+    return 'old'
+  }
+  return 'young'
+})
 
 const Contact = model('contact', contactSchema);
 
