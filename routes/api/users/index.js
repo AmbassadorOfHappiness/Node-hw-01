@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const { aggregation, repeatEmailForVerifyUser, uploadAvatar, verifyUser } = require('../../../controllers/users');
-const guard = require('../../../midllewares/guard');
-const upload = require('../../../midllewares/upload');
-const roleAccess = require('../../../midllewares/role-access');
+const guard = require('../../../middlewares/guard');
+const upload = require('../../../middlewares/upload');
+const roleAccess = require('../../../middlewares/role-access');
 const {Role} = require('../../../config/constants');
-const wrapperError = require('../../../midllewares/error-handler');
+const wrapperError = require('../../../middlewares/error-handler');
 
 const router = new Router();
 

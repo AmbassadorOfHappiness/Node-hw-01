@@ -6,7 +6,7 @@ const {
   CloudFileStorage
 } = require('../../service/file-storage');
 
-const { EmailService, SenderNodemailer, SenderSendgrid } = require('../../service/email');
+const { EmailService, SenderNodemailer } = require('../../service/email');
 const { CustomError } = require('../../config/custom-error');
 
 const aggregation = async (req, res, next) => {
@@ -40,7 +40,7 @@ const verifyUser = async (req, res, next) => {
     await repositoryUsers.updateVerify(userFromToken.id, true)
     return res
       .status(HttpCode.OK)
-      .json({ status: 'success', code: HttpCode.OK, data: {message: 'Success'} });
+      .json({ status: 'success', code: HttpCode.OK, data: {message: 'Verification email sent'} });
   }
   throw new CustomError(HttpCode.BAD_REQUEST, 'Invalid token');
 }
@@ -65,7 +65,7 @@ const repeatEmailForVerifyUser = async (req, res, next) => {
     throw new CustomError(HttpCode.SE, 'Service Unavailable');
   }
 
-  throw new CustomError(HttpCode.NOT_FOUND, `User with ${email} not found`);
+  throw new CustomError(HttpCode.NOT_FOUND, 'Not found', 'User not found');
 }
 
 module.exports = {aggregation, uploadAvatar, verifyUser, repeatEmailForVerifyUser};

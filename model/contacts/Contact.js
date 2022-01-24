@@ -20,7 +20,6 @@ const contactSchema = new Schema(
       lowercase: true,
       unique: true,
       maxLength: [50, "Max length 50 signs"],
-      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     phone: {
       type: String,

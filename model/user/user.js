@@ -48,6 +48,7 @@ const userSchema = new Schema(
     isVerify: { type: Boolean, default: false},
     verifyTokenEmail: {
       type: String,
+      required: [true, 'Verify token is required'],
       default: randomUUID(),
     },
   },

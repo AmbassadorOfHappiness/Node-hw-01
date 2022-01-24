@@ -1,4 +1,5 @@
 const Contact = require("../../model/contacts/Contact");
+const { Types } = require('mongoose');
 
 const getStatisticsContacts = async (id) => {
   const data = await Contact.aggregate([

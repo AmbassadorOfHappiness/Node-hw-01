@@ -1,6 +1,6 @@
 const authService = require("../../service/auth");
 const { HttpCode } = require("../../config/constants");
-const {EmailService, SenderNodemailer, SenderSendgrid} = require('../../service/email');
+const {EmailService, SenderSendgrid} = require('../../service/email');
 const { CustomError } = require('../../config/custom-error');
 
 const signup = async (req, res, next) => {

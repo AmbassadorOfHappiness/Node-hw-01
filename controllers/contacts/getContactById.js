@@ -16,7 +16,7 @@ const getContactById = async (req, res, next) => {
         data: { contact },
       });
   }
-  throw new CustomError(HttpCode.NOT_FOUND, `Contact '${id}' not found`);
+  throw new CustomError(HttpCode.NOT_FOUND, 'Not found', `Contact '${id}' not found`);
 }
 
 

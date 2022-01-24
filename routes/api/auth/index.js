@@ -6,8 +6,8 @@ const {
   logout,
   signup
 } = require("../../../controllers/auth");
-const guard = require("../../../midllewares/guard");
-const wrapperError = require('../../../midllewares/error-handler');
+const guard = require("../../../middlewares/guard");
+const wrapperError = require('../../../middlewares/error-handler');
 
 router.get('/current', guard, wrapperError(currentUser));
 router.post('/login', wrapperError(login));

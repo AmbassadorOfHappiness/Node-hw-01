@@ -16,7 +16,7 @@ const removeContact = async (req, res, next) => {
     });
   }
 
-  throw new CustomError(HttpCode.NOT_FOUND, `Can't find contact with id: ${id}`);
+  throw new CustomError(HttpCode.NOT_FOUND, 'Not found', `Can't find contact with id: ${id}`);
 }
 
 module.exports = removeContact;

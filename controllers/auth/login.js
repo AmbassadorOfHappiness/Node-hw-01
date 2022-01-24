@@ -7,7 +7,7 @@ const login = async (req, res, next) => {
   const user = await authService.getUser(email, password)
 
   if (!user) {
-    throw new CustomError(HttpCode.UNAUTHORIZED, 'Email or password is wrong');
+    throw new CustomError(HttpCode.UNAUTHORIZED, 'Invalid credentials', 'Email or password is wrong');
   }
   
   const token = authService.getToken(user)
