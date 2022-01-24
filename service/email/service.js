@@ -11,7 +11,7 @@ class EmailService {
         this.link = 'http://localhost:3000/';
         break
       case 'production':
-        this.link = 'http://heroku/';
+        this.link = 'https://api-hw-35.herokuapp.com';
         break      
       default:
         this.link = 'http://localhost:3000/';
@@ -57,7 +57,8 @@ class EmailService {
       console.log(result);
       return true;
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
+      return false;
     }
   }
 };

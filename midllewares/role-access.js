@@ -3,7 +3,7 @@ const { FORBIDDEN } = require('../config/messages');
 
 const guard = (role) => async (req, res, next) => {
   const roleCurrentUser = req.user.role;
-  if (roleCurrentUser === role) {
+  if (roleCurrentUser !== role) {
     return res
     .status(HttpCode.FORBIDDEN)
       .json({

@@ -5,7 +5,7 @@ const { CustomError } = require('../../config/custom-error');
 const getContactById = async (req, res, next) => {
   const { id } = req.params;
   const { id: userId } = req.user;
-  const contact = await repositoryContacts.getContactById(userId, id);
+  const contact = await repository.getContactById(userId, id);
   if (contact) {
     return res
       .status(HttpCode.OK)

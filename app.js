@@ -34,8 +34,14 @@ app.use((req, res) => {
     .status(HttpCode.NOT_FOUND)
     .json({ status: 'error', code: HttpCode.NOT_FOUND, message: 'Not found' })
 })
-
 app.use((err, req, res, next) => {
+  res.status(HttpCode.INTERNAL_SERVER_ERROR).json({
+    status: 'fail',
+    code: HttpCode.INTERNAL_SERVER_ERROR,
+    message: err.message,
+  })
+})
+/* app.use((err, req, res, next) => {
   const statusCode = err.status || HttpCode.INTERNAL_SERVER_ERROR;
   const status = statusCode === HttpCode.INTERNAL_SERVER_ERROR ? 'fail' : 'error';
   res.status().json({
@@ -43,6 +49,6 @@ app.use((err, req, res, next) => {
     code: statusCode,
     message: err.message,
   })
-})
+}) */
 
 module.exports = app;

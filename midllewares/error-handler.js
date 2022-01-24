@@ -1,6 +1,6 @@
 const {HttpCode} = require('../config/constants');
 
-const wrapperError = (fn) => async (req, res, next) => {
+const wrapper = (fn) => async (req, res, next) => {
   try {
     const result = await fn(req, res, next);
     return result;
@@ -29,4 +29,4 @@ const wrapperError = (fn) => async (req, res, next) => {
   }
 }
 
-module.exports = wrapperError;
+module.exports = wrapper;

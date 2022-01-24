@@ -17,9 +17,8 @@ const aggregation = async (req, res, next) => {
       .status(HttpCode.OK)
       .json({ status: 'success', code: HttpCode.OK, data })
   }
-  res
-    .status(HttpCode.NOT_FOUND)
-    .json({ status: 'error', code: HttpCode.NOT_FOUND, message: 'Not found' });
+
+  throw new CustomError(HttpCode.NOT_FOUND, 'Not found', `Contact '${id}' not found`);
 }
 
 const uploadAvatar = async (req, res, next) => {
@@ -43,13 +42,7 @@ const verifyUser = async (req, res, next) => {
       .status(HttpCode.OK)
       .json({ status: 'success', code: HttpCode.OK, data: {message: 'Success'} });
   }
-  res
-  .status(HttpCode.BAD_REQUEST)
-  .json({ 
-    status: 'success', 
-    code: HttpCode.BAD_REQUEST, 
-    data: {message: 'Invalid token'} 
-  });
+  throw new CustomError(HttpCode.BAD_REQUEST, 'Invalid token');
 }
 
 const repeatEmailForVerifyUser = async (req, res, next) => {
@@ -66,17 +59,13 @@ const repeatEmailForVerifyUser = async (req, res, next) => {
     if(isSend) {
       return res
       .status(HttpCode.OK)
-      .json({ status: 'success', code: HttpCode.OK, data: {message: `Success`} });
+      .json({ status: 'success', code: HttpCode.OK, data: {message: 'Success'} });
     }
 
-    return res
-      .status(HttpCode.SE)
-      .json({ status: 'error', code: HttpCode.SE, data: {message: `Unprocessable Entity`} });
+    throw new CustomError(HttpCode.SE, 'Service Unavailable');
   }
 
-  res
-    .status(HttpCode.NOT_FOUND)
-    .json({ status: 'error', code: HttpCode.NOT_FOUND, data: {message: `User with ${email} not found`} });
+  throw new CustomError(HttpCode.NOT_FOUND, `User with ${email} not found`);
 }
 
 module.exports = {aggregation, uploadAvatar, verifyUser, repeatEmailForVerifyUser};

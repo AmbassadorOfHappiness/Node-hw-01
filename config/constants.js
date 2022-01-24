@@ -13,6 +13,9 @@ const HttpCode = {
   SE: 503,
 }
 
+const MIN_AGE = 16;
+const MAX_AGE = 69;
+
 const Role = {
   STARTER: 'starter',
   PRO: 'pro',
@@ -23,4 +26,4 @@ const LIMIT_JSON = 5000;
 
 const CLOUD_FOLDER_AVATARS = 'Node_hw';
 
-module.exports = {HttpCode, Role, LIMIT_JSON, CLOUD_FOLDER_AVATARS};
+module.exports = {HttpCode, MIN_AGE, MAX_AGE, Role, LIMIT_JSON, CLOUD_FOLDER_AVATARS};
